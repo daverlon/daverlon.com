@@ -4,7 +4,7 @@ if (temp == "") {
   temp = "index.html";
 }
 
-$.get("templates/content/" + temp, function(data) {
+$.get("page-content/" + temp, function(data) {
   $("#content-placeholder").replaceWith(data);
 });
 
