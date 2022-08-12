@@ -12,6 +12,14 @@ html body {
     margin-top: 15px;
 }
 
+#top-logo {
+    transition: 0.4s ease;
+}
+
+#top-logo:hover {
+    transform: scale(1.1);
+}
+
 #main-content-section {
     border-top: rgb(150, 150, 150) 1px solid;
     border-bottom: rgb(150, 150, 150) 1px solid;
