@@ -1,12 +1,5 @@
 
 
-// add new blog posts ABOVE!!
-const all_blog_posts = [
-  "meet-the-crew",
-  "second-post-for-testing",
-  "my-first-blog-post"
-];
-
 
 class BlogPost {
   constructor(title, date, content) {
@@ -59,6 +52,5 @@ all_blog_posts.forEach(post => {
     content_section.append(el);
 
     $("#content-placeholder").append(content_section);
-
   });
 })
