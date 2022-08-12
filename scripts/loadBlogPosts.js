@@ -6,8 +6,6 @@ const all_blog_posts = [
   "my-first-blog-post"
 ];
 
-var counter = 0;
-
 
 class BlogPost {
   constructor(title, date, content) {
@@ -59,11 +57,7 @@ all_blog_posts.forEach(post => {
     content_section.id = "main-content-section";
     content_section.append(el);
 
-    if (counter != 0) {
-    }
-
     $("#content-placeholder").append(content_section);
 
-    counter++;
   });
 })
