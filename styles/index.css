@@ -5,6 +5,7 @@
 html body {
     font-family: 'Manrope';
     color: #4C4C3C;
+    background-color: rgb(254, 253, 250);
     font-size: 25px;
 }
 
@@ -70,4 +71,5 @@ a:link  {
     font-size: 16px;
     font-weight: 600;
 }
+
 
