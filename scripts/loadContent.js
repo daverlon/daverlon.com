@@ -5,6 +5,8 @@ if (temp == "") {
 }
 
 $.get("page-content/" + temp, function(data) {
-  $("#content-placeholder").replaceWith(data);
+  const content = document.createElement("div");
+  content.innerHTML = data;
+  $("#content-placeholder").append(content);
 });
 
