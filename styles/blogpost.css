@@ -1,0 +1,22 @@
+
+
+.blog-post-date {
+  margin-top: -4px;
+  font-size: 14px;
+  color: #6A6A6A;
+  font-style: italic;
+}
+
+.blog-content {
+  margin-top: 10px;
+}
+
+.blog-content p {
+  font-family: 'Catamaran';
+  color: #1c1c1c;
+  font-size: 16px;
+}
+
+#main-content-section {
+  margin-bottom: -19px;
+}
