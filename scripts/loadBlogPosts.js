@@ -21,11 +21,11 @@ function fetchBlogPost(page) {
   return new BlogPost(temp_title, temp_date, temp_content);
 }
 
-all_blog_posts.forEach(post => {
+const posts = all_blog_posts;
+for (var i = 0; i < all_blog_posts.length; i++) {
+  const post = all_blog_posts[i];
   const cur_post = $.get("blog-posts/" + post + ".html", function(data) {
-
     const blog = fetchBlogPost(data);
-    console.log(blog);
 
     const el = document.createElement("div");
     el.className = "blog-post";
@@ -46,11 +46,10 @@ all_blog_posts.forEach(post => {
     el.append(blog_header);
     el.append(blog_content)
 
-
     const content_section = document.createElement("div");
-    content_section.id = "main-content-section";
+    content_section.classList.add("main-content-section");
+    content_section.id = "blog-post-" + i;
     content_section.append(el);
-
     $("#content-placeholder").append(content_section);
   });
-})
+}
