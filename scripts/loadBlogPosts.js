@@ -1,5 +1,5 @@
 
-
+$(document).ready(function() {
 
 class BlogPost {
   constructor(title, date, content) {
@@ -21,35 +21,46 @@ function fetchBlogPost(page) {
   return new BlogPost(temp_title, temp_date, temp_content);
 }
 
+
 const posts = all_blog_posts;
-for (var i = 0; i < all_blog_posts.length; i++) {
-  const post = all_blog_posts[i];
-  const cur_post = $.get("blog-posts/" + post + ".html", function(data) {
-    const blog = fetchBlogPost(data);
 
-    const el = document.createElement("div");
-    el.className = "blog-post";
+jQuery.ajaxSetup({async:false});
 
-    const blog_header = document.createElement("div");
-    blog_header.className = "content-header";
-    blog_header.textContent = blog.title;
+for (let i = 0; i < all_blog_posts.length; i++) {
+    const post = all_blog_posts[i];
+    jQuery.get("blog-posts/" + post + ".html", function(data) {
+      var blog = fetchBlogPost(data);
+      //console.log(blog.title);
 
-    const blog_date = document.createElement("div");
-    blog_date.className = "blog-post-date";
-    blog_date.textContent = "• " + blog.date;
+      let el = document.createElement("div");
+      el.className = "blog-post";
+  
+      let blog_header = document.createElement("div");
+      blog_header.className = "content-header";
+      blog_header.textContent = blog.title;
+  
+      let blog_date = document.createElement("div");
+      blog_date.className = "blog-post-date";
+      blog_date.textContent = "• " + blog.date;
+  
+      let blog_content = document.createElement("div");
+      blog_content.className = "blog-content";
+      blog_content.innerHTML = blog.content;
+  
+      blog_header.append(blog_date)
+      el.append(blog_header);
+      el.append(blog_content)
+  
+      let content_section = document.createElement("div");
+      content_section.classList.add("main-content-section");
+      content_section.id = "blog-post-" + i;
+      content_section.append(el);
+      $("#content-placeholder").append(content_section);
+      
+    });
 
-    const blog_content = document.createElement("div");
-    blog_content.className = "blog-content";
-    blog_content.innerHTML = blog.content;
-
-    blog_header.append(blog_date)
-    el.append(blog_header);
-    el.append(blog_content)
-
-    const content_section = document.createElement("div");
-    content_section.classList.add("main-content-section");
-    content_section.id = "blog-post-" + i;
-    content_section.append(el);
-    $("#content-placeholder").append(content_section);
-  });
 }
+
+jQuery.ajaxSetup({async:true});
+
+});
