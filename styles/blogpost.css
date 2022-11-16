@@ -22,3 +22,21 @@
   border-top: rgb(150, 150, 150) 1px solid;
   border-bottom: rgb(150, 150, 150) 1px solid;
 }
+
+.blog-post-unsorted-list {
+  font-size: 14px;
+}
+
+.jupyter-notebook-embed {
+  margin-bottom: 26px; 
+  margin-left: -98px; 
+  margin-top: 9px;
+  width: 120%;
+  transition: 1s ease height;
+  transition-delay: 0.3s;
+}
+
+.jupyter-notebook-embed:hover {
+  height: 300px;
+}
+
