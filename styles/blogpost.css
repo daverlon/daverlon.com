@@ -28,15 +28,31 @@
 }
 
 .jupyter-notebook-embed {
+  outline: 2px rgb(200,200,200) solid;
   margin-bottom: 26px; 
-  margin-left: -98px; 
+  /* margin-left: -98px;  */
   margin-top: 9px;
-  width: 120%;
-  transition: 1s ease height;
-  transition-delay: 0.3s;
+
+  transition: 1s ease width, 1s ease height, 1s ease margin-left;
+  transition-delay: 0.4s;
 }
 
 .jupyter-notebook-embed:hover {
-  height: 300px;
+  width: 140%;
+  height: 550px;
+  margin-left: -20%;
+}
+
+.code-image-expandable {
+  outline: 2px rgb(200,200,200) solid;
+  height: 170px;
+  overflow-y: scroll;
+  margin-bottom: 26px;
+  transition: 1s ease height;
+  transition-delay: 0.4s;
+}
+
+.code-image-expandable:hover {
+  height: 550px;
 }
 
