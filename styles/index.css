@@ -39,7 +39,8 @@ a:focus { */
     transition: 0.4s ease;
 }
 
-#top-logo:hover {
+#top-logo:hover,
+#top-logo:focus {
     transform: scale(1.1);
 }
 
@@ -91,12 +92,16 @@ a:link  {
 }
 
 #github-logo-footer {
-    margin-left: auto;
     margin-left: 35px;
     float: left;
-    /* margin-right: 50%; */
     margin-top: -4px;
     width: 30px;
+    /* transition: 0.4s; */
+}
+
+#github-logo-footer:hover,
+#github-logo-footer:focus{
+    /* transform: scale(1.2); */
 }
 
 

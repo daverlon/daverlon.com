@@ -37,7 +37,8 @@
   transition-delay: 0.4s;
 }
 
-.jupyter-notebook-embed:hover {
+.jupyter-notebook-embed:hover,
+.jupyter-notebook-embed:focus {
   width: 140%;
   height: 550px;
   margin-left: -20%;
@@ -52,7 +53,8 @@
   transition-delay: 0.4s;
 }
 
-.code-image-expandable:hover {
+.code-image-expandable:hover,
+.code-image-expandable:focus {
   height: 550px;
 }
 
