@@ -13,8 +13,12 @@ html body {
     margin-top: 15px;
 }
 
-.nav-item.active {
-    text-decoration: underline;
+#navbar-items .nav-link.active {
+    transition: none;
+    text-decoration: none;
+    color: #7E7E7E;
+/* .nav-link.active { */
+  background-size: 0 0.1em, 100% 0.1em;
 }
 
 #navbar-items a {
@@ -30,10 +34,12 @@ html body {
 
 /* a:hover,
 a:focus { */
-#navbar-items a:hover,
-#navbar-items a:focus {
+#navbar-items .nav-link:hover,
+#navbar-items .nav-link:focus {
+    color: #7E7E7E;
   background-size: 0 0.1em, 100% 0.1em;
 }
+
 
 #top-logo {
     transition: 0.4s ease;
