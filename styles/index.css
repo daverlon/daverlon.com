@@ -11,6 +11,7 @@ html body {
 
 .navbar {
     margin-top: 15px;
+    
 }
 
 #navbar-items .nav-link.active {
@@ -53,9 +54,9 @@ a:focus { */
 .main-content-section {
     border-top: rgb(150, 150, 150) 1px solid;
     border-bottom: rgb(150, 150, 150) 1px solid;
-    margin-top: 18px;
-    padding-top: 25px;
-    padding-bottom: 17px;
+    margin-top: 18px; /* important to be 18 so it aligns */
+    padding-top: 15px;
+    padding-bottom: 25px;
 }
 
 p {
@@ -75,8 +76,10 @@ a:link  {
 .content-header {
     font-family: 'Assistant';
     color: #3E5E7C;
-    font-weight: 700;
-    font-size: 24px;
+    font-weight: bold;
+    font-size: 26px;
+    margin-top: 30px;
+    margin-bottom: 3px;
 }
 
 #links-section {
@@ -115,4 +118,19 @@ a:link  {
      transform: scale(1.2); 
 }
 
+ul {
+
+      font-size: 19px; 
+    font-family: 'Catamaran';
+      margin-bottom: 24px; 
+      color: rgba(15,15,15,255);
+
+}
+
+li {
+
+      font-size: 19px; 
+    font-family: 'Catamaran';
+      color: rgba(30,30,30,255);
+}
 

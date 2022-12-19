@@ -25,7 +25,7 @@ $.get("templates/navbar.html", function (data) {
 window.addEventListener('load', function () {
   console.log(temp);
   var navname = "nav-" + temp.split(".")[0];
-  if (navname == "nav-index") return;
+  //if (navname == "nav-index") return;
   console.log("Name: " + navname);
   var element = document.getElementById(navname);
   console.log(element);
