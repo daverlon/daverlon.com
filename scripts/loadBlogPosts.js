@@ -60,17 +60,19 @@ for (let i = 0; i < all_blog_posts.length; i++) {
     });
 
 }
-
 window.addEventListener('load', function() {
 
+  // get the anchor tag from the URL
+  var anchor = window.location.hash.substring(1);
+
   // find the blog post with the anchor tag
-  var meetTheTeamPost = document.getElementById('meet-the-team');
+  var post = document.getElementById(anchor);
 
   // check if the post has been loaded
-  if (meetTheTeamPost) {
+  if (post) {
 
     // scroll to the post
-    meetTheTeamPost.scrollIntoView();
+    post.scrollIntoView();
   }
 });
 
