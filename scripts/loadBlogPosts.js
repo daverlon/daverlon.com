@@ -61,6 +61,19 @@ for (let i = 0; i < all_blog_posts.length; i++) {
 
 }
 
+window.addEventListener('load', function() {
+
+  // find the blog post with the anchor tag
+  var meetTheTeamPost = document.getElementById('meet-the-team');
+
+  // check if the post has been loaded
+  if (meetTheTeamPost) {
+
+    // scroll to the post
+    meetTheTeamPost.scrollIntoView();
+  }
+});
+
 jQuery.ajaxSetup({async:true});
 
 });
