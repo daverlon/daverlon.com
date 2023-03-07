@@ -2,7 +2,7 @@
 <br>
 <h2>Live preview can be viewed here!<h2> 
 <br>
-<a href="https://davlondev.github.io/personal-website" target="_blank" class="intext-link">
+<a href="https://davlon.dev" target="_blank">
     Click me!
 </a>
 
