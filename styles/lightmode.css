@@ -149,3 +149,17 @@ li {
   color: #6A6A6A;
   font-style: italic;
 }
+
+
+.blog-content a:hover {
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.nav-link:hover {
+    text-decoration: none;
+}
+
