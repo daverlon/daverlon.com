@@ -14,8 +14,11 @@
 <script>
     let isDarkModeEnabled = localStorage.getItem('isDarkModeEnabled');
     if (isDarkModeEnabled) {
-
         document.body.style.backgroundColor = '#2e353b';
-        document.body.style.color = '#2e353b';
-    };
+        document.body.style.color = '#fff';
+    }
+    else {
+        document.body.style.backgroundColor = '#FFFDFA';
+        document.body.style.color = '#FFFDFA';
+    }
 </script>
