@@ -60,22 +60,24 @@ for (let i = 0; i < all_blog_posts.length; i++) {
     });
 
 }
-window.addEventListener('load', function() {
 
+
+window.addEventListener('load', function() {
   // get the anchor tag from the URL
   var anchor = window.location.hash.substring(1);
-
   // find the blog post with the anchor tag
   var post = document.getElementById(anchor);
+  // listen for the load event of the blog post
+  // scroll the window to the post, with an offset to position the post at the top of the screen
 
-  // check if the post has been loaded
-  if (post) {
-
-    // scroll to the post
-    post.scrollIntoView();
-  }
+  setTimeout(function() {
+      post.parentElement.parentElement.parentElement.scrollIntoView();
+  }, 500);
 });
+
+
 
 jQuery.ajaxSetup({async:true});
 
 });
+
