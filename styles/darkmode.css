@@ -56,7 +56,11 @@ html body {
 
 #darkmode-toggle-button:hover,
 #darkmode-toggle-button:focus {
-    transform: scale(1.3);
+    transform: scale(1.5);
+}
+
+#darkmode-toggle-button:active {
+    transform: scale(0.7);
 }
 
 .main-content-section {
