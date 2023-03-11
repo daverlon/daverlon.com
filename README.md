@@ -1,8 +1,7 @@
-<h1>My personal portfolio website.</h1>
+<h1>My personal portfolio website!</h1>
 <br>
-<h2>Live preview can be viewed here!<h2> 
-<br>
+<p>Website is live! Hosted by GitHub.<p> 
 <a href="https://davlon.dev" target="_blank">
-    Click me!
+    Click me - https://davlon.dev!
 </a>
 
