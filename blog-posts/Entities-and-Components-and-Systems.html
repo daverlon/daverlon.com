@@ -1,0 +1,67 @@
+title=Entities and Components and Systems
+date=12th July 2023
+
+<div class="blog-post">
+  <p>It's university break. <i>Sometimes I find myself more dedicated and motivated toward my studies during
+    the break...</i> Anyway, I've been recently working on a longer-term personal *fun* 
+    project, which is a small code-oriented game <i>framework</i> designed to build 2D games.
+    The engine itself is being developed using C++, 
+    <a href="https://github.com/libsdl-org/SDL" target="_blank">SDL2</a>.
+    I'm using SDL2 as the rendering backend of the engine, and designing the structure from scratch.
+    <br>
+    <br>
+    A long while ago, I found myself intrigued with just how games and game engines are structed in the backend.
+    I noticed that when I tried to create small games, that the classic <i>every entity in the game is an actaul
+        object in the programming language.
+    </i> (Heavily object oriented design) was extremely difficult to work with as the project became more and more complex.
+
+    However, for this project, I decided to implement the 
+    <a href="https://en.wikipedia.org/wiki/Entity_component_system" target="_blank">ECS architecture</a>
+
+    into the design, and so far it has worked wonderfully for
+    general project organization and I suspect for 
+    <a href="https://en.wikipedia.org/wiki/CPU_cache" target="_blank">performance</a>
+    as well..
+
+    <br>
+    <br>
+
+    Moments before starting on this exact post, I pretty much finished refactoring the tilemap system which
+    I had previously implemented. The reason I'm mentioning this is because I did not notice exactly how much progress 
+    I had made with the engine until I thought of possibly merging the tilemap system and the ECS system (previously completely seperate).
+    And with small tweaks, I made tilemaps work completely seamlessly with the entity management system, as tilemaps were now an entity with
+    a tilemap component. 
+
+    <br>
+    <br>
+
+    The main reason for making this post is that I believe the engine is now <u>almost</u> in a state, which is ready to be
+    showcased!
+
+    <br>
+    <br>
+
+    <img src="https://github.com/davlondev/sdl2-rpg-engine/raw/main/screenshot.png" width="450">
+
+    <p>Next steps:</p>
+    <ul>
+        <li>
+            <p>User interface features</p> 
+        </li>
+
+        <li>
+            <p>Onscreen text (UI and <u>world?</u>)</p> 
+        </li>
+
+        <li>
+            <p>Audio & sound fx</p> 
+        </li>
+    </ul>
+    
+  </p>
+  <p>
+    View the source code on
+    <a href="https://github.com/davlondev/sdl2-rpg-engine" target="_blank">GitHub!</a>
+  </p>
+
+</div>
