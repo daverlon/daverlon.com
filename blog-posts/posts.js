@@ -4,6 +4,7 @@
 
 
 const all_blog_posts = [
+  "Optimizing-the-Collision-System",
   "Entities-and-Components-and-Systems",
   "CNNs-and-Conv2d",
   "learning-deep-learning-deep",

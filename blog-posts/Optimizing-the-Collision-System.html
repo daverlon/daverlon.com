@@ -1,0 +1,55 @@
+title=Optimizing the Collision System
+date=1st October 2023
+
+<div class="blog-post">
+  <p>
+    It's no longer university break (
+    <a href="https://dictionary.cambridge.org/dictionary/english/you-don-t-say" target="_blank">wow?</a>
+    ). In fact, this has been probably the busiest 
+    semester <i>yet</i>. But in between assessments and hardcore study
+    sessions, I've found some time to work on my hobby project, 
+    <a href="https://github.com/davlondev/candy2d" target="_blank">candy2d</a>.
+    This small project was briefly shown in the previous blog post, however
+    there are now even more features implemented! At the time of the 
+    previous blog post <i>(12th July 2023)</i>, the collision system was 
+    quite crude, and worked by iterating over each collision component, 
+    then iterating over every other collision component to test for an 
+    intersection. However, this quickly became an issue when I decided to
+    spawn 1000 entities 
+    (<i>this system actaully gave me huge performance 
+    drops with only a few hundred active collision components</i>).
+
+    <br>
+    I looked into some alternative implementations.
+    <br>
+    <br>
+    After some research, I ran across a method that involved splitting 
+    the game world up into cells, and adding a reference to the components 
+    who are in each cell, <i>to each cell</i>. The idea is that, instead of
+    looping through each collider, then checking for any collisions with 
+    every other collider, there would only be checks between colliders 
+    who share the same cell. It is unlikely that a collider at cell (1,1) 
+    would be intersecting a collider at cell (15, 12).
+    <br>
+    <br>
+    This system was surprisingly trivial to implement and the code can be 
+    viewed on <a href="http://github.com/davlondev/candy2d" target="_blank">GitHub</a>.
+    Here is a screenshot of the system and its' debug render features activated.
+    I also added a projectile! Admin privileges allow me to shoot them at every angle on 
+    <i>almost</i> every frame.
+
+    <br>
+    <br>
+    <img src="blog-posts/resources/images/collision-grid-example.png" width="500">
+
+    <p>Next steps? (<i>revamped!</i>):</p>
+    <ul>
+        <li>
+            <p><i>From scratch</i>, portable SDL2 UI library!</p> 
+        </li>
+    </ul>
+  </p>
+  <p>
+
+
+</div>
