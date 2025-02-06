@@ -22,43 +22,57 @@ function fetchBlogPost(page) {
 }
 
 
-const posts = all_blog_posts;
+// const posts = all_blog_posts;
+
+function loadpage() {
 
 jQuery.ajaxSetup({async:false});
 
 for (let i = 0; i < all_blog_posts.length; i++) {
+
     const post = all_blog_posts[i];
     jQuery.get("blog-posts/" + post + ".html", function(data) {
       var blog = fetchBlogPost(data);
-      //console.log(blog.title);
 
       let el = document.createElement("div");
       el.className = "blog-post";
   
+      // clickable link to blog post contents
       let blog_header = document.createElement("div");
-      blog_header.className = "content-header";
       blog_header.textContent = blog.title;
-  
+      blog_header.className = "content-header blog-post-title";
+
+
+
+      blog_header.onclick = ()=>{
+        if (blog_content.style.display == 'none' || blog_content.style.display == '') {
+            blog_content.style.display = 'block';
+        }
+        else {
+            blog_content.style.display = 'none';
+        }
+      };
+
+
       let blog_date = document.createElement("div");
       blog_date.className = "blog-post-date";
       blog_date.textContent = "• " + blog.date;
   
+      blog_header.append(blog_date);
+      el.append(blog_header);
+
       let blog_content = document.createElement("div");
       blog_content.className = "blog-content";
       blog_content.innerHTML = blog.content;
-  
-      blog_header.append(blog_date)
-      el.append(blog_header);
       el.append(blog_content)
-  
+      blog_content.style.display = 'none';
+
       let content_section = document.createElement("div");
       content_section.classList.add("main-content-section");
       content_section.id = "blog-post-" + i;
       content_section.append(el);
       $("#content-placeholder").append(content_section);
-      
     });
-
 }
 
 
@@ -77,7 +91,13 @@ window.addEventListener('load', function() {
 
 
 
+
+
 jQuery.ajaxSetup({async:true});
 
-});
+}
+
+loadpage();
+
+}); // document onready
 

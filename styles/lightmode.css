@@ -89,6 +89,15 @@ a:link  {
     margin-bottom: 3px;
 }
 
+.blog-post-title {
+    cursor: pointer;
+}
+
+.blog-post-title:hover,
+.blog-post-title:focus {
+    text-decoration: underline;
+}
+
 #links-section {
     margin-left: 30px;
 }
