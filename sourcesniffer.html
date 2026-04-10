@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sourcesniffer — David Long</title>
+
+    <!-- Prevent theme flash -->
+    <script>
+        if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.classList.add("dark");
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #000000;
+            --muted: #444444;
+            --link: #0000ee;
+            --rule: #000000;
+            --btn-bg: #f0f0f0;
+            --btn-border: #bbbbbb;
+            --btn-text: #555555;
+        }
+
+        html.dark {
+            --bg: #1c1c1c;
+            --text: #e8e8e8;
+            --muted: #aaaaaa;
+            --link: #7eb3ff;
+            --rule: #888888;
+            --btn-bg: #2a2a2a;
+            --btn-border: #555555;
+            --btn-text: #aaaaaa;
+        }
+
+        html,
+        body {
+            transition: background 0.2s, color 0.2s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .page {
+            max-width: 750px;
+            margin: 48px auto;
+            padding: 0 32px 64px;
+        }
+
+        #theme-toggle {
+            position: fixed;
+            top: 16px;
+            right: 20px;
+            padding: 5px 10px;
+            background: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 11px;
+            color: var(--btn-text);
+        }
+
+        .resume-name {
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .resume-contact {
+            font-size: 13px;
+            text-align: center;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .resume-contact a {
+            color: var(--link);
+        }
+
+        .meta {
+            font-size: 12px;
+            text-align: center;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .section-heading {
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--rule);
+            padding-bottom: 2px;
+            margin-top: 24px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .text-block {
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            padding-left: 18px;
+            margin-top: 4px;
+        }
+
+        li {
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+
+        code {
+            background: var(--btn-bg);
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        .back {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 16px;
+            color: var(--link);
+            text-decoration: none;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="theme-toggle">
+        <span id="toggle-label">dark</span>
+    </button>
+
+    <div class="page">
+
+        <a href="index.html" class="back">← back</a>
+
+        <div class="resume-name">sourcesniffer</div>
+
+        <div class="resume-contact">
+            <a href="https://github.com/daverlon/sourcesniffer" target="_blank">
+                github.com/daverlon/sourcesniffer
+            </a>
+        </div>
+
+        <div class="meta">
+            Kotlin · Networking · Reverse Engineering · Pcap4J
+        </div>
+
+        <div class="section-heading">Overview</div>
+        <div class="text-block">
+            sourcesniffer is a low-level networking framework that implements the Valve Source Engine
+            netchannel protocol from scratch. It enables real-time decoding, inspection, and manipulation
+            of game traffic at the bit level.
+        </div>
+
+        <div class="text-block">
+            The project was built to explore protocol behavior, message injection, and real-time control
+            of client-server communication without access to official implementations.
+        </div>
+
+        <div class="section-heading">Core Capabilities</div>
+        <ul>
+            <li>Bit-accurate packet parsing (headers, flags, checksums, sequencing)</li>
+            <li>Full message decoding and encoding (client ↔ server)</li>
+            <li>Split packet reassembly and compression handling</li>
+            <li>Real-time packet interception and modification</li>
+        </ul>
+
+        <div class="section-heading">System Design</div>
+        <ul>
+            <li><code>packetparser/</code> — core packet decoding pipeline</li>
+            <li><code>messages/</code> — protocol message definitions</li>
+            <li><code>messagehandler/</code> — dispatch and routing</li>
+            <li><code>proxy/</code> — MITM proxy implementation</li>
+            <li><code>packetloader/</code> — packet capture via Pcap4J</li>
+        </ul>
+
+        <div class="section-heading">Execution Modes</div>
+        <ul>
+            <li><b>Sniffer:</b> passive capture and decoding of live traffic</li>
+            <li><b>Proxy (MITM):</b> intercept, modify, and forward packets between client and server</li>
+        </ul>
+
+        <div class="section-heading">Notable Features</div>
+        <ul>
+            <li>Inject chat messages and console commands into live sessions</li>
+            <li>Rewrite player movement and input in real-time</li>
+            <li>Maintain protocol correctness to avoid desynchronisation</li>
+        </ul>
+
+        <div class="section-heading">Technical Challenges</div>
+        <ul>
+            <li>Reconstructing undocumented protocol structures from observation</li>
+            <li>Implementing bit-level readers/writers matching engine format</li>
+            <li>Handling unreliable vs reliable message channels</li>
+            <li>Maintaining sync while modifying live traffic</li>
+            <li>Dealing with compression (Snappy) and packet fragmentation</li>
+        </ul>
+
+        <div class="section-heading">What I Learned</div>
+        <ul>
+            <li>Deep understanding of real-time networking protocols</li>
+            <li>Practical reverse engineering workflows</li>
+            <li>Designing systems that operate under strict correctness constraints</li>
+            <li>Trade-offs between control, stability, and detection risk</li>
+        </ul>
+
+        <div class="section-heading">Current Status</div>
+        <ul>
+            <li>Unreliable messages fully implemented</li>
+            <li>Reliable message handling in progress</li>
+            <li>Entity packet parsing not yet implemented</li>
+            <li>Configuration currently hard-coded</li>
+        </ul>
+
+        <div class="section-heading">Future Work</div>
+        <ul>
+            <li>Full reliable channel implementation</li>
+            <li>Complete entity decoding (SVC_PacketEntities)</li>
+            <li>CLI configuration system</li>
+            <li>Improved tooling and packet visualisation</li>
+        </ul>
+
+    </div>
+
+    <script>
+        const btn = document.getElementById('theme-toggle');
+        const label = document.getElementById('toggle-label');
+
+        if (document.documentElement.classList.contains("dark")) {
+            label.textContent = "light";
+        }
+
+        btn.addEventListener('click', () => {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem("theme", isDark ? "dark" : "light");
+            label.textContent = isDark ? "light" : "dark";
+        });
+    </script>
+
+</body>
+
+</html>

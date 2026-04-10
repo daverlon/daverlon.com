@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>taxi-search — David Long</title>
+
+    <script>
+        if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.classList.add("dark");
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #000000;
+            --muted: #444444;
+            --link: #0000ee;
+            --rule: #000000;
+            --btn-bg: #f0f0f0;
+            --btn-border: #bbbbbb;
+            --btn-text: #555555;
+        }
+
+        html.dark {
+            --bg: #1c1c1c;
+            --text: #e8e8e8;
+            --muted: #aaaaaa;
+            --link: #7eb3ff;
+            --rule: #888888;
+            --btn-bg: #2a2a2a;
+            --btn-border: #555555;
+            --btn-text: #aaaaaa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .page {
+            max-width: 750px;
+            margin: 48px auto;
+            padding: 0 32px 64px;
+        }
+
+        #theme-toggle {
+            position: fixed;
+            top: 16px;
+            right: 20px;
+            padding: 5px 10px;
+            background: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            border-radius: 16px;
+            font-size: 11px;
+            color: var(--btn-text);
+            cursor: pointer;
+        }
+
+        .resume-name {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .resume-contact {
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .resume-contact a {
+            color: var(--link);
+        }
+
+        .meta {
+            text-align: center;
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .section-heading {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 1px solid var(--rule);
+            margin-top: 24px;
+            margin-bottom: 10px;
+            padding-bottom: 2px;
+        }
+
+        .text-block {
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            padding-left: 18px;
+            margin-top: 4px;
+        }
+
+        li {
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+
+        .back {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 16px;
+            color: var(--link);
+            text-decoration: none;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        code {
+            background: var(--btn-bg);
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="theme-toggle">
+        <span id="toggle-label">dark</span>
+    </button>
+
+    <div class="page">
+
+        <a class="back" href="index.html">← back</a>
+
+        <div class="resume-name">taxi-search</div>
+
+        <div class="resume-contact">
+            <a href="https://github.com/daverlon/taxi-search" target="_blank">
+                github.com/daverlon/taxi-search
+            </a>
+        </div>
+
+        <div class="meta">
+            Python · Graph Search · AI Planning · Taxi-v3 (Gymnasium)
+        </div>
+
+        <div class="section-heading">Overview</div>
+        <div class="text-block">
+            taxi-search is an AI search framework that implements and compares classical graph search
+            algorithms in the Taxi-v3 environment from Gymnasium.
+        </div>
+
+        <div class="text-block">
+            The project focuses on building a fully self-contained state representation and search system
+            that can solve the environment without relying on Gym’s internal transition logic during search.
+        </div>
+
+        <div class="section-heading">Algorithms Implemented</div>
+        <ul>
+            <li>Depth-First Search (DFS)</li>
+            <li>Breadth-First Search (BFS)</li>
+            <li>Uniform Cost Search (UCS)</li>
+            <li>A* Search (with Manhattan-distance heuristic)</li>
+        </ul>
+
+        <div class="section-heading">Core Design</div>
+        <ul>
+            <li>Custom state encoding/decoding of Taxi-v3 environment</li>
+            <li>State represented as a 4-element vector (taxi, passenger, destination, location)</li>
+            <li>Explicit transition system via a custom TaxiPuzzle class</li>
+            <li>Action masking implemented independently of Gymnasium</li>
+            <li>Search tree built via node expansion rather than environment stepping</li>
+        </ul>
+
+        <div class="section-heading">A* Heuristic</div>
+        <ul>
+            <li>Manhattan distance to passenger when not picked up</li>
+            <li>Manhattan distance to destination after pickup</li>
+            <li>Two-phase goal structure (pickup → drop-off)</li>
+        </ul>
+
+        <div class="section-heading">Key Engineering Decisions</div>
+        <ul>
+            <li>Decoupled search logic from Gymnasium for full control and reproducibility</li>
+            <li>Explicit node-based search tree (parent/child structure)</li>
+            <li>Priority queue ordering for optimal-path selection</li>
+            <li>Uniform cost interpretation of reward (-1 step, +20 delivery, -10 penalty)</li>
+        </ul>
+
+        <div class="section-heading">Performance Analysis</div>
+        <ul>
+            <li>Evaluated across 500 random environments</li>
+            <li>Metrics: search time, expansions, frontier size, final reward</li>
+            <li>A* and UCS consistently found optimal solutions</li>
+            <li>DFS produced faster but non-optimal solutions</li>
+        </ul>
+
+        <div class="section-heading">Key Results (Summary)</div>
+        <ul>
+            <li>A*, UCS, BFS: optimal reward (~7.69 average)</li>
+            <li>DFS: faster but suboptimal (~0.82 average reward)</li>
+            <li>A* significantly reduced node expansions vs BFS/UCS</li>
+            <li>BFS had highest frontier size and memory cost</li>
+        </ul>
+
+        <div class="section-heading">Limitations</div>
+        <ul>
+            <li>Fully decoupled from Gym environment (manual simulation required)</li>
+            <li>No dynamic environment stepping during search</li>
+            <li>Action mask implemented manually (no runtime env queries)</li>
+            <li>Limited to Taxi-v3 state space structure</li>
+        </ul>
+
+        <div class="section-heading">What I Learned</div>
+        <ul>
+            <li>Graph search behaviour differences in practice (DFS vs BFS vs UCS vs A*)</li>
+            <li>Trade-offs between optimality and computational cost</li>
+            <li>Designing state machines independent of simulation environments</li>
+            <li>Impact of heuristics on search efficiency</li>
+        </ul>
+
+    </div>
+
+    <script>
+        const btn = document.getElementById('theme-toggle');
+        const label = document.getElementById('toggle-label');
+
+        if (document.documentElement.classList.contains("dark")) {
+            label.textContent = "light";
+        }
+
+        btn.addEventListener('click', () => {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem("theme", isDark ? "dark" : "light");
+            label.textContent = isDark ? "light" : "dark";
+        });
+    </script>
+
+</body>
+
+</html>

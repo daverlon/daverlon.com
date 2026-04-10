@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KotlinYOLO — David Long</title>
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --muted: #444444;
+      --link: #0000ee;
+      --rule: #000000;
+      --btn-bg: #f0f0f0;
+      --btn-border: #bbbbbb;
+      --btn-text: #555555;
+    }
+
+    html.dark {
+      --bg: #1c1c1c;
+      --text: #e8e8e8;
+      --muted: #aaaaaa;
+      --link: #7eb3ff;
+      --rule: #888888;
+      --btn-bg: #2a2a2a;
+      --btn-border: #555555;
+      --btn-text: #aaaaaa;
+    }
+
+    html, body { transition: background 0.2s, color 0.2s; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 750px;
+      margin: 48px auto;
+      padding: 0 32px 64px;
+    }
+
+    /* Toggle */
+    #theme-toggle {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px 5px 8px;
+      background: var(--btn-bg);
+      border: 1px solid var(--btn-border);
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 11px;
+      color: var(--btn-text);
+    }
+
+    .resume-name {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    .resume-contact {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .resume-contact a { color: var(--link); }
+
+    .section-heading {
+      font-size: 16px;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 2px;
+      margin-bottom: 10px;
+      margin-top: 24px;
+      text-align: center;
+    }
+
+    .text-block {
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin-top: 4px;
+    }
+
+    li {
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+
+    .meta {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .back {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 16px;
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    .back:hover {
+      text-decoration: underline;
+    }
+
+    code {
+      background: var(--btn-bg);
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+<button id="theme-toggle">
+  <span id="toggle-label">dark</span>
+</button>
+
+<div class="page">
+
+  <a href="index.html" class="back">← back</a>
+
+  <div class="resume-name">KotlinYOLO</div>
+
+  <div class="resume-contact">
+    <a href="https://github.com/daverlon/KotlinYOLO" target="_blank">
+      github.com/daverlon/KotlinYOLO
+    </a>
+  </div>
+
+  <div class="meta">
+    Kotlin · Android · ONNX Runtime · Vuzix Smart Glasses
+  </div>
+
+  <div class="section-heading">Overview</div>
+  <div class="text-block">
+    KotlinYOLO is a real-time object detection system built for Android-based smart glasses,
+    focusing on efficient on-device inference using YOLO models in ONNX format.
+  </div>
+
+  <div class="text-block">
+    The project explores the practical limits of edge AI deployment on constrained wearable hardware,
+    balancing latency, thermal constraints, and usability.
+  </div>
+
+  <div class="section-heading">Key Features</div>
+  <ul>
+    <li>Real-time object detection using YOLOv8n / YOLO11n models</li>
+    <li>ONNX Runtime integration using Java/Kotlin APIs</li>
+    <li>CameraX pipeline with dynamic resolution handling</li>
+    <li>Bounding box rendering on live camera feed</li>
+    <li>Support for Vuzix M400 and Blade 2 devices</li>
+  </ul>
+
+  <div class="section-heading">Architecture</div>
+  <div class="text-block">
+    The system follows a lightweight pipeline:
+  </div>
+
+  <ul>
+    <li>Camera frame acquisition via <code>CameraX</code></li>
+    <li>Preprocessing into 640×640 tensor format</li>
+    <li>ONNX model inference using <code>OrtSession</code></li>
+    <li>Post-processing (NMS, bounding box scaling)</li>
+    <li>Overlay rendering to display detections</li>
+  </ul>
+
+  <div class="section-heading">Technical Challenges</div>
+  <ul>
+    <li>Achieving usable FPS on low-power wearable hardware</li>
+    <li>Handling aspect ratio mismatch without distortion</li>
+    <li>Minimising memory allocations in real-time loops</li>
+    <li>Balancing CPU vs GPU execution paths in ONNX Runtime</li>
+  </ul>
+
+  <div class="section-heading">What I Learned</div>
+  <ul>
+    <li>Practical constraints of edge AI vs cloud inference</li>
+    <li>Android performance optimisation at the system level</li>
+    <li>Trade-offs between model size, accuracy, and latency</li>
+    <li>Designing systems for real-world hardware limitations</li>
+  </ul>
+
+  <div class="section-heading">Future Work</div>
+  <ul>
+    <li>Segmentation model support (YOLOv8-seg)</li>
+    <li>Hardware acceleration improvements</li>
+    <li>Server-assisted inference fallback</li>
+    <li>Integration into production AR workflows</li>
+  </ul>
+
+</div>
+
+<script src="theme.js"></script>
+
+</body>
+</html>
