@@ -102,6 +102,7 @@
             font-weight: bold;
             letter-spacing: 0.05em;
             border-bottom: 1px solid var(--rule);
+
             padding-bottom: 2px;
             margin-bottom: 10px;
             margin-top: 24px;
@@ -148,6 +149,18 @@
             border-radius: 3px;
             font-size: 12px;
         }
+
+        .image-center {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .image-center img {
+            max-width: 500px;
+            width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 
@@ -177,6 +190,10 @@
         <div class="text-block">
             KotlinYOLO is a real-time object detection system built for Android-based smart glasses,
             focusing on efficient on-device inference using YOLO models in ONNX format.
+        </div>
+
+        <div class="image-center">
+            <img src="img/kotlinyolo_preview.png" alt="KotlinYOLO preview" width="350px">
         </div>
 
         <div class="text-block">

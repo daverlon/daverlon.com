@@ -142,6 +142,23 @@
             border-radius: 3px;
             font-size: 12px;
         }
+
+
+        .image-center {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .image-center img {
+            max-width: 500px;
+            width: 100%;
+            height: auto;
+        }
+
+        .italic {
+            font-style: italic;
+        }
     </style>
 </head>
 
@@ -171,6 +188,13 @@
         <div class="text-block">
             ENGtoID is a sequence-to-sequence neural machine translation system that translates English
             sentences into Bahasa Indonesia using an LSTM encoder-decoder architecture.
+        </div>
+        <div class="image-center">
+            <img src="img/engtoid_performance.png" alt="ENGtoID performance" width="350px">
+        </div>
+        <div class="text-block italic" style="text-align: center;">
+            The plots show the training and validation performance of the model, demonstrating dips in accuracy
+            caused by experimental teacher forcing
         </div>
 
         <div class="text-block">
