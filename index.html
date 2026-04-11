@@ -371,6 +371,13 @@
         </table>
 
         <div class="section-heading">Software Projects</div>
+        <div style="text-align:center; margin-bottom:14px;">
+            <select id="project-sort" style="font-size:12px; padding:0px 2px;">
+                <option value="date-desc">Newest first</option>
+                <option value="date-asc">Oldest first</option>
+                <option value="name">Name (A–Z)</option>
+            </select>
+        </div>
 
         <div class="entry">
             <div class="entry-top">
@@ -428,7 +435,7 @@
             <div class="project-meta">Python, Matplotlib</div>
             <div class="project-desc">Implementation and evaluation of A*, Uniform-Cost Search, Breadth-First Search,
                 and Depth-First Search within the Taxi-v3 environment, including structured performance analysis and
-                visualised benchmarking results. Achieved 85% in ICT203.</div>
+                visualised benchmarking results.</div>
         </div>
 
         <div class="entry">
@@ -554,5 +561,68 @@
 
     <script src="theme.js"></script>
 </body>
+
+<script>
+    function getYear(entry) {
+        const dateEl = entry.querySelector('.date');
+        if (!dateEl) return 0;
+
+        const text = dateEl.textContent;
+
+        if (text.toLowerCase().includes("coming")) return 9999;
+
+        const match = text.match(/\d{4}/);
+        return match ? parseInt(match[0]) : 0;
+    }
+
+    function getName(entry) {
+        const nameEl = entry.querySelector('.project-name');
+        return nameEl ? nameEl.textContent.toLowerCase() : "";
+    }
+
+    function getProjectEntries() {
+        const projectsHeading = Array.from(document.querySelectorAll('.section-heading'))
+            .find(h => h.textContent.trim() === "Software Projects");
+
+        let entries = [];
+        let el = projectsHeading.nextElementSibling;
+
+        while (el && !el.classList.contains('section-heading')) {
+            if (el.classList.contains('entry')) {
+                entries.push(el);
+            }
+            el = el.nextElementSibling;
+        }
+
+        return { entries, container: projectsHeading.parentElement };
+    }
+
+    function sortProjects(mode) {
+        const { entries, container } = getProjectEntries();
+
+        let sorted = [...entries];
+
+        if (mode === "date-desc") {
+            sorted.sort((a, b) => getYear(b) - getYear(a));
+        } else if (mode === "date-asc") {
+            sorted.sort((a, b) => getYear(a) - getYear(b));
+        } else if (mode === "name") {
+            sorted.sort((a, b) => getName(a).localeCompare(getName(b)));
+        }
+
+        sorted.forEach(entry => container.appendChild(entry));
+    }
+
+    const select = document.getElementById("project-sort");
+
+    // initial sort
+    sortProjects(select.value);
+
+    select.addEventListener("change", () => {
+        sortProjects(select.value);
+    });
+</script>
+
+</script>
 
 </html>
