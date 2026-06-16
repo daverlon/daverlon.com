@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script>
+        if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.classList.add("dark");
+        }
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Symly.ai — David Long</title>
+
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #000000;
+            --muted: #444444;
+            --link: #0000ee;
+            --rule: #000000;
+            --btn-bg: #f0f0f0;
+            --btn-border: #bbbbbb;
+            --btn-text: #555555;
+        }
+
+        html.dark {
+            --bg: #1c1c1c;
+            --text: #e8e8e8;
+            --muted: #aaaaaa;
+            --link: #7eb3ff;
+            --rule: #888888;
+            --btn-bg: #2a2a2a;
+            --btn-border: #555555;
+            --btn-text: #aaaaaa;
+        }
+
+        html,
+        body {
+            transition: background 0.2s, color 0.2s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .page {
+            max-width: 750px;
+            margin: 48px auto;
+            padding: 0 32px 64px;
+        }
+
+        #theme-toggle {
+            position: fixed;
+            top: 16px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 10px 5px 8px;
+            background: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 11px;
+            color: var(--btn-text);
+        }
+
+        .resume-name {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .resume-contact {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .resume-contact a {
+            color: var(--link);
+        }
+
+        .section-heading {
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--rule);
+            padding-bottom: 2px;
+            margin-bottom: 10px;
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        .text-block {
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            padding-left: 18px;
+            margin-top: 4px;
+        }
+
+        li {
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+
+        .meta {
+            font-size: 12px;
+            color: var(--muted);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .back {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 16px;
+            color: var(--link);
+            text-decoration: none;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        code {
+            background: var(--btn-bg);
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        .image-center {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .image-center img {
+            max-width: 500px;
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="theme-toggle">
+        <span id="toggle-label">dark</span>
+    </button>
+
+    <div class="page">
+
+        <a href="index.html" class="back">← back</a>
+
+        <div class="resume-name">Symly.ai</div>
+
+        <div class="resume-contact">
+            <a href="https://github.com/daverlon/symly.ai" target="_blank">
+                github.com/daverlon/symly.ai
+            </a>
+        </div>
+
+        <div class="meta">
+            Java · Spring Boot · PostgreSQL · React · TypeScript · Vite · Tailwind CSS · Gemini · Mathpix
+        </div>
+
+        <div class="section-heading">Overview</div>
+        <div class="text-block">
+            Symly.ai is an AI math tutor for handwritten homework. Upload a photo of a student's working,
+            and the app extracts the math, maps it to spatial regions on the page, and lets you chat with
+            an AI tutor that can reference specific lines and steps — highlighting the relevant boxes on the image.
+        </div>
+
+        <div class="image-center">
+            <img src="img/symly_preview.png" alt="Symly.ai — AI tutor reviewing handwritten algebra with spatial highlights">
+        </div>
+
+        <div class="text-block">
+            The project is archived and open source (MIT) for reference and local use. It reached a useful
+            prototype stage: the chat tutor understands page content well, but bounding-box step detection
+            remains incomplete on complex layouts.
+        </div>
+
+        <div class="section-heading">Key Features</div>
+        <ul>
+            <li><b>Desk sessions</b> — organize photos of handwritten work, reorder them, upload from desktop or phone via QR</li>
+            <li><b>Hybrid OCR</b> — Mathpix for high-quality LaTeX plus optional local PP-OCRv5 for per-line bounding boxes</li>
+            <li><b>Expression steps</b> — groups OCR boxes into logical math steps using Mathpix layout and Gemini structured output</li>
+            <li><b>Spatial AI tutor</b> — Gemini chat with a system prompt built from extracted text and layout; responses link to lines/steps and highlight regions</li>
+            <li><b>Persistent chat</b> — conversation history stored per desk image</li>
+        </ul>
+
+        <div class="section-heading">Backend</div>
+        <div class="text-block">
+            Spring Boot REST API with a conventional layered layout: controllers expose HTTP endpoints,
+            services hold business logic, and JPA repositories persist to PostgreSQL. Resources are scoped
+            to user-owned sessions — every desk image, OCR result, and chat thread is verified against the
+            authenticated account before access.
+        </div>
+        <ul>
+            <li><b>Auth</b> — stateless JWT via a servlet filter; login/register are public, everything else requires a bearer token</li>
+            <li><b>Sessions &amp; desk</b> — a session owns an ordered list of desk images; images are stored on disk and referenced by filename in the database</li>
+            <li><b>OCR orchestration</b> — <code>DeskService</code> runs the hybrid pipeline, caches results on the desk image row, and serves them on demand (regenerate/clear endpoints for re-runs)</li>
+            <li><b>AI layer</b> — <code>GeminiService</code> handles two roles: structured JSON output for expression-step grouping, and conversational tutoring with a system prompt built from cached OCR text and spatial layout</li>
+            <li><b>Chat persistence</b> — each user/assistant exchange is appended to ordered history per desk image; the frontend sends full context, the backend persists only the latest turn</li>
+            <li><b>Phone upload</b> — ephemeral upload keys let a phone POST images without a full login; a separate SSE stream pushes <code>image_uploaded</code> events to the desktop session in real time</li>
+        </ul>
+
+        <div class="section-heading">Frontend</div>
+        <div class="text-block">
+            React 19 SPA (Vite + TypeScript + Tailwind) with a thin API layer and custom hooks that keep
+            the dashboard shell declarative. The core UX is a single workspace: pick a session, browse desk
+            photos, open the AI tutor against one image, and see spatial highlights when the model references
+            specific working.
+        </div>
+        <ul>
+            <li><b>Routing</b> — <code>/dashboard/s/:sessionId</code> for the main workspace; <code>/u/:uploadKey</code> for the minimal phone-upload page</li>
+            <li><b>API client</b> — shared base URL and JWT helper; domain modules (<code>sessionsApi</code>, <code>deskImageApi</code>, <code>ocrApi</code>, <code>chatApi</code>) keep fetch logic out of components</li>
+            <li><b>Real-time sync</b> — <code>useEventSource</code> subscribes to SSE per active session so QR uploads appear in the desk strip without a refresh</li>
+            <li><b>Desk strip &amp; image panel</b> — reorderable thumbnails, blob URL hydration for previews, canvas-backed empty state while sessions load</li>
+            <li><b>AI chat panel</b> — slide-over tutor with react-markdown + KaTeX; parses tutor references to box/step IDs and draws polygon highlights over the desk image on hover or mention</li>
+            <li><b>OCR debug UI</b> — collapsible panels for raw boxes, Mathpix line data, and Gemini expression steps; useful for tuning the pipeline during development</li>
+        </ul>
+
+        <div class="section-heading">OCR Pipeline</div>
+        <div class="text-block">When local OCR is enabled:</div>
+        <ul>
+            <li>PP-OCRv5 detects text regions and polygon bounding boxes</li>
+            <li>Mathpix extracts LaTeX for the full image</li>
+            <li>Mathpix <code>line_data</code> defines semantic step regions; intersecting PP-OCR boxes are batched to Gemini</li>
+            <li>Gemini returns grouped steps (<code>boxIds</code> + LaTeX text) used for the debug UI and spatial chat references</li>
+        </ul>
+
+        <div class="section-heading">What I Learned</div>
+        <ul>
+            <li>Combining commercial OCR (Mathpix) with local detection for spatial grounding</li>
+            <li>Structured LLM output for layout-aware tutoring UX</li>
+            <li>Full-stack session management with real-time upload flows (QR, SSE)</li>
+            <li>Trade-offs on messy handwriting, multi-column worksheets, and dense matrix derivations</li>
+        </ul>
+
+        <div class="section-heading">Status</div>
+        <div class="text-block">
+            Archived prototype. Available for local development — see the
+            <a href="https://github.com/daverlon/symly.ai" target="_blank">README</a> for setup.
+        </div>
+
+    </div>
+
+    <script src="theme.js"></script>
+
+</body>
+
+</html>
