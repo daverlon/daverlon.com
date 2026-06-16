@@ -124,19 +124,48 @@
         }
 
         .resume-contact {
-            font-size: 13px;
-            color: var(--muted);
             margin-bottom: 14px;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
         }
 
-        .resume-contact a {
-            color: var(--link);
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            color: #000;
+            text-decoration: none;
+            line-height: 0;
+            opacity: 0.65;
+            padding: 4px;
+        }
+
+        .contact-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .contact-link:hover {
+            opacity: 1;
+        }
+
+        .contact-link:focus-visible,
+        .github-link:focus-visible {
+            opacity: 1;
+            outline: 2px solid var(--link);
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+
+        html.dark .contact-link {
+            color: #ccc;
         }
 
         .resume-summary {
             font-size: 13px;
             margin-bottom: 18px;
+            text-align: left;
         }
 
         /* Section heading */
@@ -215,8 +244,21 @@
         }
 
         .project-name {
+            text-decoration: none;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--link);
             text-decoration: underline;
             text-underline-offset: 2px;
+        }
+
+        .read-more:hover {
+            color: var(--text);
         }
 
         .project-meta {
@@ -224,13 +266,88 @@
             color: var(--muted);
         }
 
-        .project-meta a {
+        .project-meta a:not(.github-link) {
             color: var(--link);
+        }
+
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            color: #000;
+            text-decoration: none;
+            line-height: 0;
+            opacity: 0.65;
+        }
+
+        .github-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .project-list .entry-top {
+            position: relative;
+            padding-right: 32px;
+        }
+
+        .project-list .entry-top > .project-meta:has(.github-link) {
+            position: absolute;
+            top: -3px;
+            right: -4px;
+            line-height: 0;
+        }
+
+        .entry-top .github-link {
+            margin: 0;
+            padding: 5px 6px 6px 6px;
+        }
+
+        .github-link:hover {
+            opacity: 1;
+        }
+
+        html.dark .github-link {
+            color: #ccc;
         }
 
         .project-desc {
             font-size: 13px;
             margin-top: 2px;
+        }
+
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .project-list .entry {
+            padding: 12px 14px;
+            margin-bottom: 0;
+            background: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            border-radius: 4px;
+        }
+
+        .project-sort-wrap {
+            text-align: center;
+            margin-bottom: 11px;
+        }
+
+        #project-sort {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            padding: 4px 10px;
+            background: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            border-radius: 4px;
+            color: var(--text);
+            cursor: pointer;
+            outline: none;
+        }
+
+        #project-sort:focus-visible {
+            outline: 2px solid var(--link);
+            outline-offset: 2px;
         }
 
         .date {
@@ -244,6 +361,18 @@
 </head>
 
 <body>
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+        <symbol id="email-icon" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+        </symbol>
+        <symbol id="linkedin-icon" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 114.127 0 2.063 2.063 0 01-2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.222 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </symbol>
+        <symbol id="github-icon" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.51 11.51 0 0112 4.8c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </symbol>
+    </svg>
 
     <button id="theme-toggle" aria-label="Toggle dark mode">
         <span class="toggle-icon">
@@ -271,23 +400,26 @@
 
         <div class="resume-name">David Long</div>
         <div class="resume-contact">
-            <a href="mailto:davernlon@gmail.com">davernlon@gmail.com</a> &nbsp;·&nbsp;
-            <a href="https://linkedin.com/in/daverlon" target="_blank">linkedin.com/in/daverlon</a> &nbsp;·&nbsp;
-            <a href="https://github.com/daverlon" target="_blank">github.com/daverlon</a>
+            <a class="contact-link" href="mailto:davernlon@gmail.com" aria-label="Email">
+                <svg><use href="#email-icon"/></svg>
+            </a>
+            <a class="contact-link" href="https://www.linkedin.com/in/daverlon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg><use href="#linkedin-icon"/></svg>
+            </a>
+            <a class="contact-link" href="https://github.com/daverlon" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg><use href="#github-icon"/></svg>
+            </a>
         </div>
-        <div class="resume-summary" style="text-align: center;">
+        <div class="resume-summary">
             Software Engineer based in Perth, completing a Bachelor of Information Technology (CS & AI) at Murdoch University.
-        </div>
-        <div class="resume-summary" style="text-align: left;">
+            <br><br>
             I build production systems across Android wearable tech and full-stack platforms, with a focus on
             performance, real-time processing, and efficient AI integration.
-
+            <br><br>
             My experience includes shipping AR applications for smart glasses, integrating cloud AI services into
             production workflows, and developing high-performance edge applications using C++, ONNX Runtime, and JNI.
-
             <br><br>
-            I’m particularly interested in intelligent systems for Educational Technology (EdTech), and wearable tech
-            applications.
+            I'm particularly interested in wearable technology.
         </div>
 
         <div class="section-heading">Professional Experience</div>
@@ -379,104 +511,87 @@
         </table>
 
         <div class="section-heading">Software Projects</div>
-        <div style="text-align:center; margin-bottom:6px;">
-            <select id="project-sort" style="font-size:12px; padding:0px 2px;">
+        <div class="project-sort-wrap">
+            <select id="project-sort">
                 <option value="date-desc">Newest first</option>
                 <option value="date-asc">Oldest first</option>
                 <option value="name">Name (A–Z)</option>
             </select>
         </div>
+        
+
+        <div class="project-list">
 
         <div class="entry">
             <div class="entry-top">
                 <span class="project-title">
-                    <a class="project-name" href="kotlinyolo.html">KotlinYOLO</a>
+                    <span class="project-name">Symly.ai</span>
+                    <span class="date">2026</span>
+                </span>
+                <span class="project-meta">
+                    <a class="github-link" href="https://github.com/daverlon/symly.ai" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg><use href="#github-icon"/></svg></a>
+                </span>
+            </div>
+            <div class="project-meta">
+                Java, Spring Boot, PostgreSQL, React, TypeScript, Vite, Tailwind CSS, Gemini, Mathpix
+            </div>
+            <div class="project-desc">An AI math tutor for handwritten homework that extracts text, maps spatial regions, and lets you chat with a tutor that highlights relevant steps on the page.</div>
+            <a class="read-more" href="symly.html">Read more</a>
+        </div>
+
+        <div class="entry">
+            <div class="entry-top">
+                <span class="project-title">
+                    <span class="project-name">KotlinYOLO</span>
                     <span class="date">2025</span>
                 </span>
-                <span class="project-meta"><a href="https://github.com/daverlon/KotlinYOLO"
-                        target="_blank">github.com/daverlon/KotlinYOLO</a></span>
+                <span class="project-meta"><a class="github-link" href="https://github.com/daverlon/KotlinYOLO" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg><use href="#github-icon"/></svg></a></span>
             </div>
             <div class="project-meta">Kotlin, Android, Vuzix</div>
             <div class="project-desc">Real-time YOLO11n, yolov8n inference on Vuzix M400 and Vuzix Blade 2 for on-device
                 edge applications.</div>
+            <a class="read-more" href="kotlinyolo.html">Read more</a>
         </div>
 
         <div class="entry">
             <div class="entry-top">
                 <span class="project-title">
-                    <a class="project-name" href="sourcesniffer.html">sourcesniffer</a>
+                    <span class="project-name">sourcesniffer</span>
                     <span class="date">2025</span>
                 </span>
-                <span class="project-meta"><a href="https://github.com/daverlon/sourcesniffer"
-                        target="_blank">github.com/daverlon/sourcesniffer</a></span>
+                <span class="project-meta"><a class="github-link" href="https://github.com/daverlon/sourcesniffer" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg><use href="#github-icon"/></svg></a></span>
             </div>
-            <div class="project-meta">Kotlin, Reverse Engineering (IDA)</div>
-            <div class="project-desc">Framework for real-time network packet analysis, supporting analysis
-                of Source Engine traffic. Includes protocol reconstruction and message inspection
-                capabilities.</div>
+            <div class="project-meta">Kotlin, Reverse Engineering</div>
+            <div class="project-desc">Framework for real-time network packet analysis of Source Engine traffic, with protocol reconstruction and message inspection.</div>
+            <a class="read-more" href="sourcesniffer.html">Read more</a>
         </div>
 
         <div class="entry">
             <div class="entry-top">
                 <span class="project-title">
-                    <a class="project-name" href="engtoid.html">ENGtoID</a>
+                    <span class="project-name">ENGtoID</span>
                     <span class="date">2024</span>
                 </span>
-                <span class="project-meta"><a href="https://github.com/daverlon/ENGtoID"
-                        target="_blank">github.com/daverlon/ENGtoID</a></span>
+                <span class="project-meta"><a class="github-link" href="https://github.com/daverlon/ENGtoID" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg><use href="#github-icon"/></svg></a></span>
             </div>
             <div class="project-meta">Python, PyTorch, Matplotlib, pandas</div>
-            <div class="project-desc">End-to-end implementation of a ~20M parameter Seq2Seq LSTM translation system,
-                including dataset preprocessing, tokenisation, vocabulary construction, cloud-based GPU training with
-                optional teacher forcing, and evaluation. Achieved 100% in ICT303.</div>
+            <div class="project-desc">End-to-end ~20M parameter Seq2Seq LSTM English–Indonesian translation system with preprocessing, training, and evaluation (100% in ICT303).</div>
+            <a class="read-more" href="engtoid.html">Read more</a>
         </div>
 
         <div class="entry">
             <div class="entry-top">
                 <span class="project-title">
-                    <a class="project-name" href="taxisearch.html">taxi-search</a>
+                    <span class="project-name">taxi-search</span>
                     <span class="date">2024</span>
                 </span>
-                <span class="project-meta"><a href="https://github.com/daverlon/taxi-search"
-                        target="_blank">github.com/daverlon/taxi-search</a></span>
+                <span class="project-meta"><a class="github-link" href="https://github.com/daverlon/taxi-search" target="_blank" aria-label="GitHub"><svg><use href="#github-icon"/></svg></a></span>
             </div>
             <div class="project-meta">Python, Matplotlib</div>
             <div class="project-desc">Implementation and evaluation of A*, Uniform-Cost Search, Breadth-First Search,
                 and Depth-First Search within the Taxi-v3 environment, including structured performance analysis and
                 visualised benchmarking results.</div>
-        </div>
-
-        <div class="entry">
-            <div class="entry-top">
-                <span class="project-title">
-                    <a class="project-name" href="symly.html">Symly.ai</a>
-                    <span class="date">2026</span>
-                </span>
-                <span class="project-meta">
-                    <a href="https://github.com/daverlon/symly.ai" target="_blank">github.com/daverlon/symly.ai</a>
-                </span>
-            </div>
-
-            <div class="project-meta">
-                Java, Spring Boot, Spring Security, PostgreSQL, Docker,
-                React, TypeScript, Vite, Tailwind CSS
-            </div>
-
-
-            <div class="project-desc">
-                A full-stack AI-powered math tutoring system designed to help students learn through instant structured
-                feedback,
-                step-by-step visual guidance, and adaptive problem generation driven by a modular AI pipeline
-                architecture.
-
-                <br>
-
-                <b>Architecture:</b> React frontend (SPA), Spring Boot REST API backend, JWT-based authentication,
-                PostgreSQL database, a containerised Docker deployment environment.
-
-                <br>
-
-            </div>
+            <a class="read-more" href="taxisearch.html">Read more</a>
         </div>
 
         <div class="entry">
@@ -485,41 +600,22 @@
                     <span class="project-name">clap-detector</span>
                     <span class="date">2026</span>
                 </span>
-                <span class="project-meta"><a href="https://github.com/daverlon/clap-detector"
-                        target="_blank">github.com/daverlon/clap-detector</a></span>
+                <span class="project-meta"><a class="github-link" href="https://github.com/daverlon/clap-detector" target="_blank" aria-label="GitHub"><svg><use href="#github-icon"/></svg></a></span>
             </div>
             <div class="project-meta">Python, YOLO, PyTorch, PySide6, PyQtGraph</div>
-            <div class="project-desc">Real-time clap detection using YOLO pose estimation to track wrist keypoints via webcam.
-                Computes signed and unsigned derivatives of normalised wrist distance to score clapping motion,
-                visualised live with a PyQtGraph plot.</div>
+            <div class="project-desc">Real-time clap detection using YOLO pose estimation to track wrist keypoints and score clapping motion via derivatives of normalised wrist distance.</div>
         </div>
 
         <div class="entry">
             <div class="entry-top">
                 <span class="project-title">
-                    <span class="project-name">MiniMonitor</span>
+                    <span class="project-name">MiniMonitor &amp; WattBar</span>
                     <span class="date">2026</span>
                 </span>
-                <span class="project-meta"><a href="https://github.com/daverlon/MiniMonitor"
-                        target="_blank">github.com/daverlon/MiniMonitor</a></span>
+                <span class="project-meta"><a class="github-link" href="https://github.com/daverlon/MiniMonitor" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg><use href="#github-icon"/></svg></a></span>
             </div>
             <div class="project-meta">Swift, Xcode</div>
-            <div class="project-desc">Minimal, hyper efficient MacOS menu bar app showing current CPU, RAM, GPU usage
-                percentages.</div>
-        </div>
-
-        <div class="entry">
-            <div class="entry-top">
-                <span class="project-title">
-                    <span class="project-name">WattBar</span>
-                    <span class="date">2026</span>
-                </span>
-                <span class="project-meta"><a href="https://github.com/daverlon/WattBar"
-                        target="_blank">github.com/daverlon/WattBar</a></span>
-            </div>
-            <div class="project-meta">Swift, Xcode</div>
-            <div class="project-desc">Minimal, hyper efficient MacOS menu bar app showing battery information such as
-                current wattage, Wh, and temperature.</div>
+            <div class="project-desc">Minimal, hyper-efficient macOS menu bar apps for system metrics (CPU, RAM, GPU) and battery info (wattage, Wh, temperature).</div>
         </div>
 
         <div class="entry">
@@ -528,32 +624,24 @@
                     <span class="project-name">ngram-wordgen</span>
                     <span class="date">2023</span>
                 </span>
-                <span class="project-meta"><a href="https://github.com/daverlon/ngram-wordgen"
-                        target="_blank">github.com/daverlon/ngram-wordgen</a></span>
+                <span class="project-meta"><a class="github-link" href="https://github.com/daverlon/ngram-wordgen" target="_blank" aria-label="GitHub"><svg><use href="#github-icon"/></svg></a></span>
             </div>
             <div class="project-meta">Python, Flask, CSS, Bootstrap, JavaScript</div>
-            <div class="project-desc">Python implementations for bigram, trigram, and n-gram statistical modelling for
-                character generation. Extended to generate tweets, McDonald's reviews, and Airline reviews in
-                <a href="https://github.com/daverlon/n-gram-word-generator" target="_blank">n-gram-word-generator</a>.
-            </div>
+            <div class="project-desc">Python bigram, trigram, and n-gram models for character generation, extended in
+                <a href="https://github.com/daverlon/n-gram-word-generator" target="_blank">n-gram-word-generator</a> for tweets and reviews.</div>
         </div>
 
         <div class="entry">
             <div class="entry-top">
                 <span class="project-title">
-                    <a class="project-name" href="minimalinstructionset.html">minimal-instruction-set</a>
+                    <span class="project-name">minimal-instruction-set</span>
                     <span class="date">2025</span>
                 </span>
-                <span class="project-meta"><a href="https://github.com/daverlon/minimal-instruction-set"
-                        target="_blank">github.com/daverlon/minimal-instruction-set</a></span>
+                <span class="project-meta"><a class="github-link" href="https://github.com/daverlon/minimal-instruction-set" target="_blank" aria-label="GitHub"><svg><use href="#github-icon"/></svg></a></span>
             </div>
             <div class="project-meta">C</div>
-            <div class="project-desc">
-                A stack-based virtual machine and interpreter written in C, implementing a custom instruction set for
-                arithmetic, stack manipulation, and control flow. Includes a parser, symbol table, and support for
-                labels, conditional jumps, and subroutine calls, with example programs demonstrating loops and execution
-                flow.
-            </div>
+            <div class="project-desc">A stack-based virtual machine and interpreter in C with a custom instruction set, parser, symbol table, and support for labels, jumps, and subroutine calls.</div>
+            <a class="read-more" href="minimalinstructionset.html">Read more</a>
         </div>
 
 
@@ -563,17 +651,12 @@
                     <span class="project-name">Candy2D</span>
                     <span class="date">2023</span>
                 </span>
-                <span class="project-meta"><a href="https://github.com/daverlon/Candy2D"
-                        target="_blank">github.com/daverlon/Candy2D</a></span>
+                <span class="project-meta"><a class="github-link" href="https://github.com/daverlon/Candy2D" target="_blank" aria-label="GitHub"><svg><use href="#github-icon"/></svg></a></span>
             </div>
             <div class="project-meta">C++, ECS, SDL2</div>
-            <div class="project-desc">
-                A cross-platform 2D game engine built on SDL2 utilising an Entity Component System (ECS)-like
-                architecture with a demonstration of optimised rectangular collision detection, as well as usage of
-                templates and object-oriented programming.
-                It includes an implementation of a 2D sprite animation system, tilemap system and object lifecycle
-                management.
-            </div>
+            <div class="project-desc">A cross-platform 2D game engine on SDL2 with ECS-like architecture, sprite animation, tilemaps, and optimised collision detection.</div>
+        </div>
+
         </div>
 
     </div>
@@ -600,20 +683,9 @@
     }
 
     function getProjectEntries() {
-        const projectsHeading = Array.from(document.querySelectorAll('.section-heading'))
-            .find(h => h.textContent.trim() === "Software Projects");
-
-        let entries = [];
-        let el = projectsHeading.nextElementSibling;
-
-        while (el && !el.classList.contains('section-heading')) {
-            if (el.classList.contains('entry')) {
-                entries.push(el);
-            }
-            el = el.nextElementSibling;
-        }
-
-        return { entries, container: projectsHeading.parentElement };
+        const container = document.querySelector('.project-list');
+        const entries = [...container.querySelectorAll('.entry')];
+        return { entries, container };
     }
 
     function sortProjects(mode) {
@@ -640,8 +712,6 @@
     select.addEventListener("change", () => {
         sortProjects(select.value);
     });
-</script>
-
 </script>
 
 </html>
