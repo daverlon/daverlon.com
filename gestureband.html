@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script>
+        if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.classList.add("dark");
+        }
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gesture Band — David Long</title>
+
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #000000;
+            --muted: #444444;
+            --link: #0000ee;
+            --rule: #000000;
+            --btn-bg: #f0f0f0;
+            --btn-border: #bbbbbb;
+            --btn-text: #555555;
+        }
+
+        html.dark {
+            --bg: #1c1c1c;
+            --text: #e8e8e8;
+            --muted: #aaaaaa;
+            --link: #7eb3ff;
+            --rule: #888888;
+            --btn-bg: #2a2a2a;
+            --btn-border: #555555;
+            --btn-text: #aaaaaa;
+        }
+
+        html,
+        body {
+            transition: background 0.2s, color 0.2s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .page {
+            max-width: 750px;
+            margin: 48px auto;
+            padding: 0 32px 64px;
+        }
+
+        #theme-toggle {
+            position: fixed;
+            top: 16px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 10px 5px 8px;
+            background: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 11px;
+            color: var(--btn-text);
+        }
+
+        .resume-name {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .resume-contact {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .resume-contact a {
+            color: var(--link);
+        }
+
+        .section-heading {
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--rule);
+            padding-bottom: 2px;
+            margin-bottom: 10px;
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        .text-block {
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            padding-left: 18px;
+            margin-top: 4px;
+        }
+
+        li {
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+
+        .meta {
+            font-size: 12px;
+            color: var(--muted);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .back {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 16px;
+            color: var(--link);
+            text-decoration: none;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        code {
+            background: var(--btn-bg);
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        .image-center {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0 0;
+        }
+
+        .image-center img {
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-center + .section-heading {
+            margin-top: 8px;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="theme-toggle">
+        <span id="toggle-label">dark</span>
+    </button>
+
+    <div class="page">
+
+        <a href="index.html" class="back">← back</a>
+
+        <div class="resume-name">Gesture Band</div>
+
+        <div class="resume-contact">
+            <i style="opacity: 0.6;">closed source</i>
+        </div>
+
+        <div class="meta">
+            Kotlin · Compose Multiplatform · SQLite · Python · scikit-learn · nRF52840 · BLE · IMU · Edge AI
+        </div>
+
+        <div class="section-heading">Overview</div>
+        <div class="text-block">
+            A field-service checklist concept designed to run on smart glasses and be controlled entirely
+            by custom wrist gestures - built for hands-free environments.
+            After researching sEMG and IMU-based gesture devices and finding limited off-the-shelf options,
+            I built a custom prototype: a 3D-printed wristband around an nRF52840, streaming 6-axis IMU
+            data over power-efficient BLE to a desktop training and demo stack.
+        </div>
+        <div class="text-block">
+            The full loop - record gestures, export a training-ready dataset, train a compact classifier,
+            and navigate a live UI - takes only minutes of capture data. The model currently detects
+            four unique navigation gestures in real time.
+        </div>
+
+        <video autoplay muted loop playsinline style="margin-bottom: 4px; max-width: 100%;">
+            <source src="vid/gesture_preview.mp4" type="video/mp4">
+        </video>
+
+        <div class="text-block italic">
+            The video shows a live capture session in Gesture Recording Studio, then the trained model
+            navigating the field-service checklist demo end-to-end: swipe to move between items, twist to
+            confirm, and shoo to go back.
+        </div>
+
+        <div class="section-heading">Motivation</div>
+        <div class="text-block">
+            Smart-glass field workflows (checklists, work orders, step confirmation) need input that works
+            when both hands are occupied. Consumer wearables with usable open SDKs are scarce, and research
+            into sEMG armbands showed hardware cost and integration friction I wanted to avoid for a first
+            prototype. A wrist-mounted IMU band paired with a fast data-collection tool was the shortest
+            path to a demonstrable hands-free UI, built from scratch.
+        </div>
+
+        <div class="section-heading">Hardware</div>
+        <ul>
+            <li><b>nRF52840</b> microcontroller with BLE UART streaming</li>
+            <li><b>LSM6DS3</b> 6-axis IMU - accelerometer and gyroscope at 100&nbsp;Hz</li>
+            <li><b>Madgwick</b> sensor fusion for roll, pitch, and yaw alongside raw IMU samples</li>
+            <li>Batched BLE notifications (5 samples per packet) to balance latency and radio duty cycle</li>
+            <li>Custom 3D-printed wristband enclosure tuned for consistent sensor orientation</li>
+        </ul>
+
+        <div class="section-heading">Gesture Recording Studio</div>
+        <div class="text-block">
+            A Kotlin Multiplatform Compose Desktop app for capturing and labelling IMU data:
+        </div>
+        <ul>
+            <li>Project-based workflow: define gestures, record samples, manage existing datasets, export datasets</li>
+            <li><b>Timed mode</b> - fixed-duration event recordings (<code>rec_*</code>) per gesture</li>
+            <li><b>Continuous mode</b> - long captures (<code>cap_*</code>) for idle and background motion</li>
+            <li>Live BLE connection to the band with sample preview during capture</li>
+            <li>Export to CSV folders and a merged <code>dataset_all.csv</code> ready for model training</li>
+        </ul>
+
+        <div class="image-center">
+            <img src="img/gestureband_grs_preview.png" alt="Gesture Recording Studio preview">
+        </div>
+
+        <div class="section-heading">ML Pipeline</div>
+        <div class="text-block">
+            Training stays deliberately small so inference can run on constrained targets:
+        </div>
+        <ul>
+            <li>240&nbsp;ms sliding windows (24 samples at 100&nbsp;Hz) with 60&nbsp;ms step</li>
+            <li>Nine hand-crafted features per window - gyro/accel std, range, and axis dominance</li>
+            <li>Multi-class logistic regression with balanced class weights and group-aware train/test splits</li>
+            <li>Between 350-400 samples for each gesture, and approximately 40 minutes of varying non-gesture activity</li>
+            <li>Per-gesture detector policies on softmax probabilities (majority vote, consecutive bursts, cooldowns)</li>
+            <li>Model exported to JSON for device inference in Kotlin; Python path for prototyping</li>
+        </ul>
+
+        <div class="section-heading">Gestures &amp; Demo UI</div>
+        <div class="text-block">
+            Four navigation gestures drive a 640×360 Compose Desktop field-service mockup (smart-glass aspect):
+        </div>
+        <ul>
+            <li><b>Swipe left / right</b> - previous / next checklist item or screen</li>
+            <li><b>Twist</b> - select, open, or confirm</li>
+            <li><b>Shoo</b> - back / dismiss</li>
+        </ul>
+        <div class="text-block" style="margin-top: 8px;">
+            The demo UI includes work-order lists, a procedure checklist with step completion, connection
+            status, and a gesture flash bar for live feedback. BLE inference runs in-process via the same
+            feature extraction and detector logic used in Python training.
+        </div>
+
+        <div class="section-heading">System Design</div>
+        <ul>
+            <li><code>test.ino</code> — firmware: IMU read, Madgwick update, BLE batch transmit</li>
+            <li><code>Gesture-Recording-Studio/</code> — KMP desktop app for capture, labelling, export</li>
+            <li><code>models/</code> — <code>train.py</code>, shared <code>gesture_features.py</code>, exported <code>gesture_model.json</code></li>
+            <li><code>python-inference/</code> — BLE client, live inference, navigation demo UI</li>
+            <li><code>Demo_Gesture_Desktop/</code> — field-service Compose UI with embedded ML + BLE</li>
+        </ul>
+
+        <div class="section-heading">Technical Challenges</div>
+        <ul>
+            <li>Separating intentional gestures from idle wrist motion (walking, desk work, fidgeting)</li>
+            <li>Tuning per-gesture detector thresholds so one motion burst does not trigger multiple classes</li>
+            <li>Designing a recording workflow fast enough that iterating on gestures takes minutes, not days</li>
+            <li>Efficient BLE batching protocol to minimise device power consumption</li>
+        </ul>
+
+        <div class="section-heading">What I Learned</div>
+        <ul>
+            <li>Timed clips (~240&nbsp;ms) are enough for quick gestures like swipes; idle motion is easier to collect with continuous recordings</li>
+            <li>Summarising each window into a handful of IMU stats (gyro variance, axis dominance, and similar) worked better than training on raw streams - less data to overfit, faster inference, and a model small enough to run on-device</li>
+            <li>Keeping the BLE packet layout, window size, and feature code aligned between firmware, training, and inference avoids subtle bugs later</li>
+            <li>Per-gesture cooldowns and vote windows reduce double-fires more reliably than chasing higher model accuracy alone</li>
+            <li>Live testing on the band matters - a model that looks good in a CSV export can still feel unresponsive or overly responsive on the wrist</li>
+            <li>For hands-free UI, a simple gesture flash or status indicator helps confirm input without needing to look closely at the screen</li>
+            <li>Building the band and app together made it straightforward to assign specific gestures to specific actions only when required, instead of adapting a generic off-the-shelf input device</li>
+        </ul>
+
+        <div class="section-heading">Current Status</div>
+        <ul>
+            <li>Working prototype band with 100&nbsp;Hz IMU data with efficient batch streaming over BLE</li>
+            <li>Gesture Recording Studio - timed and continuous capture with dataset management and exporting</li>
+            <li>Four navigation gestures trained and running reliably in real time on desktop demo</li>
+            <li>Kotlin and Python inference paths sharing the same feature and detector config</li>
+            <li>Field-service checklist demo navigable entirely by wrist gestures, compatible with Android devices</li>
+            <li>Exploring air-writing letter recognition as a separate model track</li>
+        </ul>
+
+        <div class="section-heading">Future Work</div>
+        <ul>
+            <li>Port inference fully to the band or a companion Android device</li>
+            <li>Longer structured recordings and improved stroke-end detection for air-writing</li>
+            <li>Vuzix / Android XR integration using the same gesture model</li>
+            <li>Model inference integrated in Gesture Recognition Studio</li>
+            <li>Dual IMU setup per hand, plus two-hand (multi-device) support in Gesture Recognition Studio</li>
+            <li>Updated case with rechargeable battery connected</li>
+            <li>Wider variety of human computer interface use-cases (e.g. non-verbal communication)</li>
+        </ul>
+
+    </div>
+
+    <script src="theme.js"></script>
+
+</body>
+
+</html>
